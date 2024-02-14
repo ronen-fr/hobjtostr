@@ -1,0 +1,289 @@
+ rfriedma  ~  ntry  hobject_perf  make
+[100%] Built target hobjperf
+ rfriedma  ~  ntry  hobject_perf  ./hobj
+hobject.cc     hobject_fmt.h  hobject.h      hobjperf       
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+MIN     to_str: 8000000000000000.00000000.0...
+MIN
+MAX     to_str: 8000000000000000.00000000.0...
+MAX
+18446744073709551615:57000000:::oname:1         to_str: FFFFFFFFFFFFFFFF.AE000000.1.oname..
+-1:57000000:::oname:1
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+== 8000000000000000.00000000.0... <> 8000000000000000.00000000.0...
+== 8000000000000000.00000000.0... <> 8000000000000000.00000000.0...
+== FFFFFFFFFFFFFFFF.AE000000.1.oname.. <> FFFFFFFFFFFFFFFF.AE000000.1.oname..
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+ rfriedma  ~  ntry  hobject_perf  make
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/hobject.cc.o
+c++: warning: /home/rfriedma/apps/fmt/libfmt.a: linker input file unused because linking not done
+[ 66%] Building CXX object CMakeFiles/hobjperf.dir/h.cc.o
+c++: warning: /home/rfriedma/apps/fmt/libfmt.a: linker input file unused because linking not done
+[100%] Linking CXX executable hobjperf
+[100%] Built target hobjperf
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+MIN     to_str: 8000000000000000.00000000.0...
+MIN
+MAX     to_str: 8000000000000000.00000000.0...
+MAX
+18446744073709551615:57000000:::oname:1         to_str: FFFFFFFFFFFFFFFF.AE000000.1.oname..
+-1:57000000:::oname:1
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+0:c2000000:n1:okey:oname2:head  to_str: 0000000000000000.34000000.head.oname2.okey.n1
+0:c2000000:n1:okey:oname2:18446744073709551614
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+1:71c00000:n2::oname3:snapdir   to_str: 0000000000000001.E8300000.snapdir.oname3..n2
+1:71c00000:n2::oname3:18446744073709551615
+== 8000000000000000.00000000.0... <> 8000000000000000.00000000.0...
+== 8000000000000000.00000000.0... <> 8000000000000000.00000000.0...
+== FFFFFFFFFFFFFFFF.AE000000.1.oname.. <> FFFFFFFFFFFFFFFF.AE000000.1.oname..
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000000.34000000.head.oname2.okey.n1 <> 0000000000000000.34000000.head.oname2.okey.n1
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+== 0000000000000001.E8300000.snapdir.oname3..n2 <> 0000000000000001.E8300000.snapdir.oname3..n2
+ rfriedma  ~  ntry  hobject_perf  make
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/rfriedma/ntry/hobject_perf
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/h.cc.o
+In file included from /home/rfriedma/ntry/hobject_perf/object.h:4,
+                 from /home/rfriedma/ntry/hobject_perf/object_fmt.h:12,
+                 from /home/rfriedma/ntry/hobject_perf/hobject_fmt.h:9,
+                 from /home/rfriedma/ntry/hobject_perf/h.cc:1:
+/home/rfriedma/ntry/hobject_perf/h.cc:55:1: error: conflicting declaration of C function ‘int main(int, char**)’
+   55 | BENCHMARK_MAIN();
+      | ^~~~~~~~~~~~~~
+/home/rfriedma/ntry/hobject_perf/h.cc:6:5: note: previous declaration ‘int main()’
+    6 | int main() {
+      |     ^~~~
+/home/rfriedma/ntry/hobject_perf/h.cc:55:1: error: conflicting declaration of C function ‘int main(int, char**)’
+   55 | BENCHMARK_MAIN();
+      | ^~~~~~~~~~~~~~
+/home/rfriedma/ntry/hobject_perf/h.cc:6:5: note: previous declaration ‘int main()’
+    6 | int main() {
+      |     ^~~~
+make[2]: *** [CMakeFiles/hobjperf.dir/build.make:90: CMakeFiles/hobjperf.dir/h.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/hobjperf.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2
+ rfriedma  ~  ntry  hobject_perf  make                                                                                                                                                                                                                                                                                                                         2 
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/h.cc.o
+c++: warning: /home/rfriedma/apps/fmt/libfmt.a: linker input file unused because linking not done
+[ 66%] Linking CXX executable hobjperf
+[100%] Built target hobjperf
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+2024-02-13T21:22:25+02:00
+Running ./hobjperf
+Run on (12 X 5100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 2.25, 1.81, 1.99
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+obj_tostr        2148 ns         2128 ns       319785
+obj_tostr2       2499 ns         2483 ns       280078
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+2024-02-13T21:22:37+02:00
+Running ./hobjperf
+Run on (12 X 5100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 1.97, 1.77, 1.98
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+obj_tostr        2141 ns         2135 ns       324749
+obj_tostr2       2516 ns         2505 ns       275471
+ rfriedma  ~  ntry  hobject_perf  make
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/hobject.cc.o
+/home/rfriedma/ntry/hobject_perf/hobject.cc:178:52: error: macro "FMT_COMPILE" passed 6 arguments, but takes just 1
+  178 |                        escape_special_chars(nspace));
+      |                                                    ^
+In file included from /home/rfriedma/ntry/hobject_perf/object_fmt.h:8,
+                 from /home/rfriedma/ntry/hobject_perf/hobject.cc:7:
+/home/rfriedma/apps/fmt/include/fmt/compile.h:120: note: macro "FMT_COMPILE" defined here
+  120 | #  define FMT_COMPILE(s) \
+      | 
+/home/rfriedma/ntry/hobject_perf/hobject.cc: In member function ‘std::string hobject_t::to_str2() const’:
+/home/rfriedma/ntry/hobject_perf/hobject.cc:176:24: error: ‘FMT_COMPILE’ was not declared in this scope
+  176 |     return fmt::format(FMT_COMPILE("{:016X}.{:08X}.head.{}.{}.{})", poolid, revhash,
+      |                        ^~~~~~~~~~~
+make[2]: *** [CMakeFiles/hobjperf.dir/build.make:76: CMakeFiles/hobjperf.dir/hobject.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/hobjperf.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2
+ rfriedma  ~  ntry  hobject_perf  make                                                                                                                                                                                                                                                                                                                         2 
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/hobject.cc.o
+/home/rfriedma/ntry/hobject_perf/hobject.cc:180:52: error: macro "FMT_COMPILE" passed 6 arguments, but takes just 1
+  180 |                        escape_special_chars(nspace));
+      |                                                    ^
+In file included from /home/rfriedma/ntry/hobject_perf/hobject.cc:5:
+/home/rfriedma/apps/fmt/include/fmt/compile.h:120: note: macro "FMT_COMPILE" defined here
+  120 | #  define FMT_COMPILE(s) \
+      | 
+/home/rfriedma/ntry/hobject_perf/hobject.cc: In member function ‘std::string hobject_t::to_str2() const’:
+/home/rfriedma/ntry/hobject_perf/hobject.cc:178:24: error: ‘FMT_COMPILE’ was not declared in this scope
+  178 |     return fmt::format(FMT_COMPILE("{:016X}.{:08X}.head.{}.{}.{})", poolid, revhash,
+      |                        ^~~~~~~~~~~
+make[2]: *** [CMakeFiles/hobjperf.dir/build.make:76: CMakeFiles/hobjperf.dir/hobject.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/hobjperf.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2
+ rfriedma  ~  ntry  hobject_perf  make                                                                                                                                                                                                                                                                                                                         2 
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/hobject.cc.o
+c++: warning: /home/rfriedma/apps/fmt/libfmt.a: linker input file unused because linking not done
+[ 66%] Linking CXX executable hobjperf
+[100%] Built target hobjperf
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+2024-02-13T21:27:01+02:00
+Running ./hobjperf
+Run on (12 X 5100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 3.56, 2.33, 2.13
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+obj_tostr        2125 ns         2120 ns       325965
+obj_tostr2       2353 ns         2347 ns       287107
+ rfriedma  ~  ntry  hobject_perf  make
+[ 33%] Building CXX object CMakeFiles/hobjperf.dir/hobject.cc.o
+c++: warning: /home/rfriedma/apps/fmt/libfmt.a: linker input file unused because linking not done
+[ 66%] Linking CXX executable hobjperf
+[100%] Built target hobjperf
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+2024-02-13T21:28:01+02:00
+Running ./hobjperf
+Run on (12 X 5100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 2.21, 2.12, 2.07
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+obj_tostr        2162 ns         2158 ns       299752
+obj_tostr2       1873 ns         1870 ns       365696
+ rfriedma  ~  ntry  hobject_perf  ./hobjperf
+2024-02-13T21:28:05+02:00
+Running ./hobjperf
+Run on (12 X 5100 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x6)
+  L1 Instruction 32 KiB (x6)
+  L2 Unified 256 KiB (x6)
+  L3 Unified 12288 KiB (x1)
+Load Average: 2.35, 2.16, 2.08
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+obj_tostr        2129 ns         2124 ns       291137
+obj_tostr2       1894 ns         1890 ns       372775
+ rfriedma  ~  ntry  hobject_perf  
+
+
+when tried to return a safe_get_key() - the results got worse!
+
+
+- 'reserve()' caused a major degradation in performance
+
+- to_str3() is much better than to_str2()
+
+- to_str4() (original version, not using the lambda */ is a bit slower than 3
+
+- to_str4() ('3' without esc5) is very slightly faster than 3
+
+This format of 'esc' is the fastest:
+
+static void escp_5(string_view in, string* out)
+{
+  ranges::for_each(in,[&](char i) {
+    if (i == '%') {
+      out->push_back('%');
+      out->push_back('p');
+    } else if (i == '.') {
+      out->push_back('%');
+      out->push_back('e');
+    } else if (i == '_') {
+      out->push_back('%');
+      out->push_back('u');
+    } else {
+      out->push_back(i);
+    }
+  });
+}
+
+but almost identical to:
+
+static void escp_2(const string& in, string* out)
+{
+  for (auto i = in.cbegin(); i != in.cend(); ++i) {
+    if (*i == '%') {
+      out->push_back('%');
+      out->push_back('p');
+    } else if (*i == '.') {
+      out->push_back('%');
+      out->push_back('e');
+    } else if (*i == '_') {
+      out->push_back('%');
+      out->push_back('u');
+    } else {
+      out->push_back(*i);
+    }
+  }
+}
+
+
+using 'append' instead of 'push_back' is slightly slower
+
+
