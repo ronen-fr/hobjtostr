@@ -172,7 +172,7 @@ template <> struct formatter<hobj2> {
     v.push_back(':');
     app_hobj2(ho.oid.name, &v);
 
-    return fmt::format_to(ctx.out(), "{}:{:08x}:{}:{}", static_cast<uint64_t>(ho.pool),
+    return fmt::format_to(ctx.out(), FMT_COMPILE("{}:{:08x}:{}:{}"), static_cast<uint64_t>(ho.pool),
 			  ho.get_bitwise_key_u32(), v, ho.snap);
   }
 };
@@ -197,7 +197,7 @@ list<hobj2*> hobj2::generate_test_instances()
   o.push_back(new hobj2(
     hobject_t(object_t("oname3"), string("oname3"), CEPH_SNAPDIR, 910, 1, "n2")));
   o.push_back(new hobj2(
-    hobject_t(object_t("onassssssssssssssssssssssssssssssssssssssssssssssssssssme3"), string("oname3"), CEPH_SNAPDIR, 910, 1, "n2")));
+    hobject_t(object_t("onasss\002sssssssssssssssssssssssssssssssssssssssssssssssssme3"), string("oname3"), CEPH_SNAPDIR, 910, 1, "n2")));
   o.push_back(new hobj2(
     hobject_t(object_t("oname3"), string("oname3"), CEPH_SNAPDIR, 910, 1, "n2")));
   o.push_back(new hobj2(
@@ -208,7 +208,7 @@ list<hobj2*> hobj2::generate_test_instances()
   return o;
 }
 
-#if 0
+#if 1
 int main()
 {
 

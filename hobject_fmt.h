@@ -17,8 +17,8 @@ static inline void append_out_escaped(const std::string& in, std::string* out)
     if (*i == '%' || *i == ':' || *i == '/' || *i < 32 || *i >= 127) {
       char buf[4];
       //snprintf(buf, sizeof(buf), "%%%02x", (int)(unsigned char)*i);
-      
-      out->append(fmt::format(FMT_COMPILE("%{:x}"), (int)(unsigned char)*i));
+
+      out->append(fmt::format(FMT_COMPILE("%{:02x}"), (int)(unsigned char)*i));
     } else {
       out->push_back(*i);
     }
