@@ -16,8 +16,9 @@ static inline void append_out_escaped(const std::string& in, std::string* out)
   for (auto i = in.cbegin(); i != in.cend(); ++i) {
     if (*i == '%' || *i == ':' || *i == '/' || *i < 32 || *i >= 127) {
       char buf[4];
-      snprintf(buf, sizeof(buf), "%%%02x", (int)(unsigned char)*i);
-      out->append(buf);
+      //snprintf(buf, sizeof(buf), "%%%02x", (int)(unsigned char)*i);
+      
+      out->append(fmt::format(FMT_COMPILE("%{:x}"), (int)(unsigned char)*i));
     } else {
       out->push_back(*i);
     }
@@ -71,7 +72,7 @@ template <> struct formatter<hobject_t> {
     v.push_back(':');
     append_out_escaped(ho.oid.name, &v);
 
-    return fmt::format_to(ctx.out(), "{}:{:08x}:{}:{}", static_cast<uint64_t>(ho.pool),
+    return fmt::format_to(ctx.out(), FMT_COMPILE("{}:{:08x}:{}:{}"), static_cast<uint64_t>(ho.pool),
 			  ho.get_bitwise_key_u32(), v, ho.snap);
   }
 };

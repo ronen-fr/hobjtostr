@@ -207,7 +207,7 @@ struct sobject_t {
   sobject_t() : snap(0) {}
   sobject_t(object_t o, snapid_t s) : oid(o), snap(s) {}
 
-  constexpr auto operator<=>(const sobject_t&) const noexcept = default;
+   auto operator<=>(const sobject_t&) const noexcept = default;
 
   void swap(sobject_t& o) {
     oid.swap(o.oid);
