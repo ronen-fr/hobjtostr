@@ -208,7 +208,7 @@ list<hobj2*> hobj2::generate_test_instances()
   return o;
 }
 
-#if 1
+#if 0
 int main()
 {
 
