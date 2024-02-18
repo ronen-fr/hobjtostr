@@ -73,7 +73,7 @@ public:
 public:
   object_t oid;
   snapid_t snap;
-private:
+public:
   uint32_t hash;
   bool max;
   uint32_t nibblewise_key_cache;
@@ -82,7 +82,7 @@ public:
   int64_t pool;
   std::string nspace;
 
-private:
+public:
   std::string key;
 
   class hobject_t_max {};
@@ -157,6 +157,28 @@ public:
   // maximum sorted value.
   static hobject_t_max get_max() {
     return hobject_t_max();
+  }
+
+  friend int cmp(const hobject_t& l, const hobject_t& r);
+  constexpr auto operator<=>(const hobject_t &rhs) const noexcept {
+    auto cmp = max <=> rhs.max;
+    if (cmp != 0) return cmp;
+    cmp = pool <=> rhs.pool;
+    if (cmp != 0) return cmp;
+    cmp = get_bitwise_key() <=> rhs.get_bitwise_key();
+    if (cmp != 0) return cmp;
+    cmp = nspace <=> rhs.nspace;
+    if (cmp != 0) return cmp;
+    if (!(get_key().empty() && rhs.get_key().empty())) {
+      cmp = get_effective_key() <=> rhs.get_effective_key();
+      if (cmp != 0) return cmp;
+    }
+    cmp = oid <=> rhs.oid;
+    if (cmp != 0) return cmp;
+    return snap <=> rhs.snap;
+  }
+  constexpr bool operator==(const hobject_t& rhs) const noexcept {
+    return operator<=>(rhs) == 0;
   }
 
   hobject_t(const object_t& oid, const std::string& key, snapid_t snap,
@@ -346,28 +368,7 @@ public:
 #endif 
 
   static void generate_test_instances(std::list<hobject_t*>& o);
-  friend int cmp(const hobject_t& l, const hobject_t& r);
-  constexpr auto operator<=>(const hobject_t &rhs) const noexcept {
-    auto cmp = max <=> rhs.max;
-    if (cmp != 0) return cmp;
-    cmp = pool <=> rhs.pool;
-    if (cmp != 0) return cmp;
-    cmp = get_bitwise_key() <=> rhs.get_bitwise_key();
-    if (cmp != 0) return cmp;
-    cmp = nspace <=> rhs.nspace;
-    if (cmp != 0) return cmp;
-    if (!(get_key().empty() && rhs.get_key().empty())) {
-      cmp = get_effective_key() <=> rhs.get_effective_key();
-      if (cmp != 0) return cmp;
-    }
-    cmp = oid <=> rhs.oid;
-    if (cmp != 0) return cmp;
-    return snap <=> rhs.snap;
-  }
-  constexpr bool operator==(const hobject_t& rhs) const noexcept {
-    return operator<=>(rhs) == 0;
-  }
-  friend struct ghobject_t;
+  friend struct hobj2;
 };
 
 
