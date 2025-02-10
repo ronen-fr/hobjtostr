@@ -256,6 +256,13 @@ int main()
     auto nv = hobject_t::virtual_to_str_w_prefix(std::get<0>(g1), std::get<1>(g1),
                                                  std::get<2>(g1), std::get<3>(g1), std::get<4>(g1));
     std::cout << fmt::format("form1 new: {}\n", nv);
+
+    auto n0 = hobject_t::virtual_to_str_w_prefix_v0(std::get<0>(g1), std::get<1>(g1),
+                                                 std::get<2>(g1), std::get<3>(g1), std::get<4>(g1));
+    std::cout << fmt::format("form1 nv0: {}\n", n0);
+    assert(nv == n0);
+
+
     //auto hoid = hobject_t(object_t(), "", CEPH_NOSNAP, 0xffffffff, pool, "");
     //hoid.build_hash_cache();
     //return "SCRUB_OBJ_" + hoid.to_str();

@@ -210,6 +210,10 @@ public:
                                      const std::string& key, snapid_t snap,
                                      uint32_t hash, int64_t pool);
 
+  static std::string virtual_to_str_w_prefix_v0(std::string_view prefix,
+                                     const std::string& key, snapid_t snap,
+                                     uint32_t hash, int64_t pool);
+
   static std::string virtual_to_str_w_prefix(std::string_view prefix,
                                      const object_id_t& oid,
                                      uint32_t hash, int64_t pool);

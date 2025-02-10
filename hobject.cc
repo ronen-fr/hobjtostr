@@ -284,7 +284,7 @@ string escp_16(const string& in)
 
 }  // namespace
 
-std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
+std::string hobject_t::virtual_to_str_w_prefix_v0(std::string_view prefix,
 							 const std::string& key,
 							 snapid_t snap,
 							 uint32_t hash,
@@ -312,6 +312,27 @@ std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
   return out;
 }
 
+std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
+					       const std::string& key,
+					       snapid_t snap,
+					       uint32_t hash,
+					       int64_t pool)
+{
+  const uint64_t poolid{pool};
+  const uint32_t revhash = _reverse_nibbles(hash);
+  const auto formt = [](uint64_t snap) -> std::string {
+    if (snap == CEPH_NOSNAP) {
+      return "{0:}_{1:016X}.{2:08X}.head..{4:}.";
+    } else if (snap == CEPH_SNAPDIR) {
+      return "{0:}_{1:016X}.{2:08X}.snapdir..{4:}.";
+    } else {
+      return "{0:}_{1:016X}.{2:08X}.{3:x}..{4:}.";
+    }
+  }(snap);
+
+  return fmt::format(fmt::runtime(formt), prefix, poolid, revhash,
+		     (unsigned long long)snap, escp_16(key));
+}
 
 std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
 							    const object_id_t& oid,
