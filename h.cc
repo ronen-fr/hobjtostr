@@ -208,14 +208,24 @@ list<hobj2*> hobj2::generate_test_instances()
   return o;
 }
 
+// list of possible arguments for virtual_to_str_w_prefix() (1'st form):
+using strwprefix_form1 = std::tuple<std::string, std::string, snapid_t, uint32_t, int64_t>;
+list<strwprefix_form1> strwprefix_form1_args = {
+  {"prx1", "ke\002y", CEPH_NOSNAP, 0xffffffff, 1},
+  {"prx2", "key", 0, 0, 0},
+  {"prx3", "", CEPH_SNAPDIR, 0xff, 0},
+  {"prx4", "key", 0x1111, 0xffff, 1},
+  {"prx5", "ke%%%%y", 0x88, 0xffffffff, 1}
+};
+
 // list of possible arguments for virtual_to_str_w_prefix() (2'nd form):
 using strwprefix_form2 = std::tuple<std::string, object_id_t, uint32_t, int64_t>;
 list<strwprefix_form2> strwprefix_form2_args = {
-  {"prx", object_id_t{"oidN", "Nspc", "key", CEPH_NOSNAP }, 0xffffffff, 1},
-  {"prx", object_id_t{"oidN", "", "key", CEPH_NOSNAP }, 0, 0},
-  {"prx", object_id_t{"oidN", "%%%%", "key", CEPH_SNAPDIR }, 0xffffffff, 1},
-  {"prx", object_id_t{"oidN", "", "oidN", 0x1111 }, 0xffffffff, 1},
-  {"prx", object_id_t{"oidN", "", "ke%%%%y", 0x88 }, 0xffffffff, 1}
+  {"prx01", object_id_t{"oidN", "Nspc", "key", CEPH_NOSNAP }, 0xffffffff, 1},
+  {"prx02", object_id_t{"oidN", "", "key", CEPH_NOSNAP }, 0, 0},
+  {"prx03", object_id_t{"oidN", "%%%%", "key", CEPH_SNAPDIR }, 0xffffffff, 1},
+  {"prx04", object_id_t{"oidN", "", "oidN", 0x1111 }, 0xffffffff, 1},
+  {"prx05", object_id_t{"oidN", "", "ke%%%%y", 0x88 }, 0xffffffff, 1}
 };
 
 
@@ -240,11 +250,29 @@ int main()
 
 
   // check the new body-less to_str()
+
+  for (auto g1 : strwprefix_form1_args) {
+
+    auto nv = hobject_t::virtual_to_str_w_prefix(std::get<0>(g1), std::get<1>(g1),
+                                                 std::get<2>(g1), std::get<3>(g1), std::get<4>(g1));
+    std::cout << fmt::format("form1 new: {}\n", nv);
+    //auto hoid = hobject_t(object_t(), "", CEPH_NOSNAP, 0xffffffff, pool, "");
+    //hoid.build_hash_cache();
+    //return "SCRUB_OBJ_" + hoid.to_str();
+
+    hobject_t ho{object_t(), std::get<1>(g1), std::get<2>(g1), std::get<3>(g1), std::get<4>(g1), ""};
+    ho.build_hash_cache();
+    string ov = std::get<0>(g1) + "_"s +  ho.to_str();
+    std::cout << fmt::format("form1 old: {}\n", ov);
+    assert(nv == ov);
+  }
+
+
   for (auto g1 : strwprefix_form2_args) {
 
     auto nv = hobject_t::virtual_to_str_w_prefix(std::get<0>(g1), std::get<1>(g1),
 						 std::get<2>(g1), std::get<3>(g1));
-    std::cout << fmt::format("new: {}\n", nv);
+    std::cout << fmt::format("form2 new: {}\n", nv);
     // the old way - create an object:
     //   auto hoid = hobject_t(object_t(oid.name),
     // 			oid.locator, // key
@@ -259,7 +287,7 @@ int main()
 		 std::get<2>(g1),      std::get<3>(g1),		std::get<1>(g1).nspace};
     ho.build_hash_cache();
     string ov = std::get<0>(g1) + "_"s +  ho.to_str();
-    std::cout << fmt::format("old: {}\n", ov);
+    std::cout << fmt::format("form1 old: {}\n", ov);
     assert(nv == ov);
   }
 
