@@ -206,56 +206,41 @@ public:
     build_hash_cache();
   }
 
-  static constexpr std::string virtual_to_str_w_prefix(std::string_view prefix,
+  static std::string virtual_to_str_w_prefix(std::string_view prefix,
                                      const std::string& key, snapid_t snap,
-                                     uint32_t hash, int64_t pool) {
-    const uint64_t poolid{pool};
-    const uint32_t revhash = _reverse_nibbles(hash);
-    string out;
-    if (snap == CEPH_NOSNAP) {
-      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head.."), prefix, poolid, revhash);
-    } else if (snap == CEPH_SNAPDIR) {
-      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir.."), prefix, poolid, revhash);
-    } else {
-      out = fmt::format(
-	FMT_COMPILE("{}_{:016X}.{:08X}.{:x}.."), prefix, poolid, revhash,
-	(unsigned long long)snap);
-    }
+                                     uint32_t hash, int64_t pool);
 
-    //escp_6(oid.name, &out);
-    //out.push_back('.');
-    escp_6(key, &out);
-    out.push_back('.');
-    //escp_6("", &out);
-
-    return out;
-  }
-
-  static constexpr std::string virtual_to_str_w_prefix(std::string_view prefix,
+  static std::string virtual_to_str_w_prefix(std::string_view prefix,
                                      const object_id_t& oid,
-                                     uint32_t hash, int64_t pool) {
-    const uint64_t poolid{pool};
-    const uint32_t revhash = _reverse_nibbles(hash);
-    auto key = (oid.name == oid.locator) ? std::string{} : oid.locator;
-    string out;
-    if (oid.snap == CEPH_NOSNAP) {
-      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head."), prefix, poolid, revhash);
-    } else if (oid.snap == CEPH_SNAPDIR) {
-      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir."), prefix, poolid, revhash);
-    } else {
-      out = fmt::format(
-	FMT_COMPILE("{}_{:016X}.{:08X}.{:x}."), prefix, poolid, revhash,
-	(unsigned long long)oid.snap);
-    }
+                                     uint32_t hash, int64_t pool);
 
-    escp_6(oid.name, &out);
-    out.push_back('.');
-    escp_6(oid.locator, &out);
-    out.push_back('.');
-    escp_6(oid.nspace, &out);
+//   static constexpr std::string virtual_to_str_w_prefix(std::string_view prefix,
+//                                      const object_id_t& oid,
+//                                      uint32_t hash, int64_t pool) {
+//     const uint64_t poolid{pool};
+//     const uint32_t revhash = _reverse_nibbles(hash);
+//     auto key = (oid.name == oid.locator) ? std::string{} : oid.locator;
+//     string out;
+//     if (oid.snap == CEPH_NOSNAP) {
+//       out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head."), prefix, poolid, revhash);
+//     } else if (oid.snap == CEPH_SNAPDIR) {
+//       out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir."), prefix, poolid, revhash);
+//     } else {
+//       out = fmt::format(
+// 	FMT_COMPILE("{}_{:016X}.{:08X}.{:x}."), prefix, poolid, revhash,
+// 	(unsigned long long)oid.snap);
+//     }
+// 
+//     escp_6(oid.name, &out);
+//     out.push_back('.');
+//     escp_6(key, &out);
+//     out.push_back('.');
+//     escp_6(oid.nspace, &out);
+// 
+//     return out;
+//   }
 
-    return out;
-  }
+
 
   hobject_t(const sobject_t &soid, const std::string &key, uint32_t hash,
 	    int64_t pool, const std::string& nspace)
@@ -355,7 +340,7 @@ public:
   static uint32_t _reverse_bits(uint32_t v) {
     return reverse_bits(v);
   }
-  static uint32_t _reverse_nibbles(uint32_t retval) {
+  static constexpr uint32_t _reverse_nibbles(uint32_t retval) {
     return reverse_nibbles(retval);
   }
 

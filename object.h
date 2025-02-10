@@ -42,7 +42,7 @@ uint32_t reverse_bits(uint32_t v) {
   return v;
 }
 
-uint32_t reverse_nibbles(uint32_t retval) {
+constexpr uint32_t reverse_nibbles(uint32_t retval) {
   /* reverse nibbles */
   retval = ((retval & 0x0f0f0f0f) << 4) | ((retval & 0xf0f0f0f0) >> 4);
   retval = ((retval & 0x00ff00ff) << 8) | ((retval & 0xff00ff00) >> 8);

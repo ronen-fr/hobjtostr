@@ -259,9 +259,111 @@ static void escp_6(const string& in, string* out)
   }
 }
 
+string escp_16(const string& in)
+{
+  string out;
+  out.reserve(in.size() * 2);
+  for (auto i : in) {
+    if (i == '%') {
+      out.push_back('%');
+      out.push_back('p');
+    } else if (i == '.') {
+      out.push_back('%');
+      out.push_back('e');
+    } else if (i == '_') {
+      out.push_back('%');
+      out.push_back('u');
+    } else {
+      out.push_back(i);
+    }
+  }
+  return out;
+}
+
+
 
 }  // namespace
 
+std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
+							 const std::string& key,
+							 snapid_t snap,
+							 uint32_t hash,
+							 int64_t pool)
+{
+  const uint64_t poolid{pool};
+  const uint32_t revhash = _reverse_nibbles(hash);
+  string out;
+  if (snap == CEPH_NOSNAP) {
+    out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head.."), prefix, poolid, revhash);
+  } else if (snap == CEPH_SNAPDIR) {
+    out =
+      fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir.."), prefix, poolid, revhash);
+  } else {
+    out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.{:x}.."), prefix, poolid, revhash,
+		      (unsigned long long)snap);
+  }
+
+  // escp_6(oid.name, &out);
+  // out.push_back('.');
+  escp_6(key, &out);
+  out.push_back('.');
+  // escp_6("", &out);
+
+  return out;
+}
+
+
+std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
+							    const object_id_t& oid,
+							    uint32_t hash,
+							    int64_t pool)
+{
+  const uint64_t poolid{pool};
+  const uint32_t revhash = _reverse_nibbles(hash);
+  const auto key = (oid.name == oid.locator) ? std::string{} : oid.locator;
+
+  const auto formt = [](uint64_t snap) -> std::string {
+    if (snap == CEPH_NOSNAP) {
+      return "{0:}_{1:016X}.{2:08X}.head.{4:}.{5:}.{6:}";
+    } else if (snap == CEPH_SNAPDIR) {
+      return "{0:}_{1:016X}.{2:08X}.snapdir.{4:}.{5:}.{6:}";
+    } else {
+      return "{0:}_{1:016X}.{2:08X}.{3:x}.{4:}.{5:}.{6:}";
+    }
+  }(oid.snap);
+
+  return fmt::format(fmt::runtime(formt), prefix, poolid, revhash,
+		     (unsigned long long)oid.snap, escp_16(oid.name), escp_16(key),
+		     escp_16(oid.nspace));
+}
+
+// constexpr std::string hobject_t::virtual_to_str_w_prefix(std::string_view prefix,
+// 							 const std::string& key,
+// 							 snapid_t snap,
+// 							 uint32_t hash,
+// 							 int64_t pool)
+// {
+//   const uint64_t poolid{pool};
+//   const uint32_t revhash = _reverse_nibbles(hash);
+//   string out;
+//   if (snap == CEPH_NOSNAP) {
+//     out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head.."), prefix, poolid, revhash);
+//   } else if (snap == CEPH_SNAPDIR) {
+//     out =
+//       fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir.."), prefix, poolid, revhash);
+//   } else {
+//     out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.{:x}.."), prefix, poolid, revhash,
+// 		      (unsigned long long)snap);
+//   }
+// 
+//   // escp_6(oid.name, &out);
+//   // out.push_back('.');
+//   escp_6(key, &out);
+//   out.push_back('.');
+//   // escp_6("", &out);
+// 
+//   return out;
+// }
 
 
 string hobject_t::to_str2() const

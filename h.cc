@@ -208,6 +208,17 @@ list<hobj2*> hobj2::generate_test_instances()
   return o;
 }
 
+// list of possible arguments for virtual_to_str_w_prefix() (2'nd form):
+using strwprefix_form2 = std::tuple<std::string, object_id_t, uint32_t, int64_t>;
+list<strwprefix_form2> strwprefix_form2_args = {
+  {"prx", object_id_t{"oidN", "Nspc", "key", CEPH_NOSNAP }, 0xffffffff, 1},
+  {"prx", object_id_t{"oidN", "", "key", CEPH_NOSNAP }, 0, 0},
+  {"prx", object_id_t{"oidN", "%%%%", "key", CEPH_SNAPDIR }, 0xffffffff, 1},
+  {"prx", object_id_t{"oidN", "", "oidN", 0x1111 }, 0xffffffff, 1},
+  {"prx", object_id_t{"oidN", "", "ke%%%%y", 0x88 }, 0xffffffff, 1}
+};
+
+
 #if 1
 int main()
 {
@@ -224,6 +235,32 @@ int main()
 
     std::cout << fmt::format("{} \tto_str: {}", *g1, g1->to_str()) << std::endl;
     std::cout << "direct ostream: " << *g1 << "\n";
+  }
+
+
+
+  // check the new body-less to_str()
+  for (auto g1 : strwprefix_form2_args) {
+
+    auto nv = hobject_t::virtual_to_str_w_prefix(std::get<0>(g1), std::get<1>(g1),
+						 std::get<2>(g1), std::get<3>(g1));
+    std::cout << fmt::format("new: {}\n", nv);
+    // the old way - create an object:
+    //   auto hoid = hobject_t(object_t(oid.name),
+    // 			oid.locator, // key
+    // 			oid.snap,
+    // 			0,		// hash
+    // 			pool,
+    // 			oid.nspace);
+    //   hoid.build_hash_cache();
+    //   return "SCRUB_OBJ_" + hoid.to_str();
+
+    hobject_t ho{std::get<1>(g1).name, std::get<1>(g1).locator, std::get<1>(g1).snap,
+		 std::get<2>(g1),      std::get<3>(g1),		std::get<1>(g1).nspace};
+    ho.build_hash_cache();
+    string ov = std::get<0>(g1) + "_"s +  ho.to_str();
+    std::cout << fmt::format("old: {}\n", ov);
+    assert(nv == ov);
   }
 
   // std::string test_1 = fmt::format("{}", o1.front()->hobj.snap);
