@@ -9,19 +9,19 @@
 #include "hobject.h"
 #include "object_fmt.h"
 
-namespace {
-// \todo reimplement
-static inline void append_out_escaped(const std::string& in, std::string* out)
-{
-  for (auto i = in.cbegin(); i != in.cend(); ++i) {
-    if (*i == '%' || *i == ':' || *i == '/' || *i < 32 || *i >= 127) {
-      out->append(fmt::format(FMT_COMPILE("%{:02x}"), (int)(unsigned char)*i));
-    } else {
-      out->push_back(*i);
-    }
-  }
-}
-}  // namespace
+// namespace {
+// // \todo reimplement
+// static inline void append_out_escaped(const std::string& in, std::string* out)
+// {
+//   for (auto i = in.cbegin(); i != in.cend(); ++i) {
+//     if (*i == '%' || *i == ':' || *i == '/' || *i < 32 || *i >= 127) {
+//       out->append(fmt::format(FMT_COMPILE("%{:02x}"), (int)(unsigned char)*i));
+//     } else {
+//       out->push_back(*i);
+//     }
+//   }
+// }
+// }  // namespace
 
 
 // namespace fmt {

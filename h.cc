@@ -186,14 +186,14 @@ list<hobj2*> hobj2::generate_test_instances()
   o.push_back(new hobj2);
   o.push_back(new hobj2);
   o.back()->max = true;
-  o.push_back(new hobj2(hobject_t(object_t("oname"), string(), 1, 234, -1, "")));
+  o.push_back(new hobj2(hobject_t(object_t("oxxname"), string(), 1, 234, -1, "")));
 
   o.push_back(
-    new hobj2(hobject_t(object_t("o%:/name2"), string("okey"), CEPH_NOSNAP, 67, 0, "n1")));
+    new hobj2(hobject_t(object_t("o%:/name2"), string("aaaa"), CEPH_NOSNAP, 67, 0, "n1")));
   o.push_back(
-    new hobj2(hobject_t(object_t("on%%//ame2"), string("okey"), CEPH_NOSNAP, 67, 0, "n1")));
+    new hobj2(hobject_t(object_t("on%%//ame2"), string("bbbb_bbbb_bbbb_bbbb_bbbb_"), CEPH_NOSNAP, 68, 0, "n3")));
   o.push_back(
-    new hobj2(hobject_t(object_t("ona\030me2"), string("okey"), CEPH_NOSNAP, 67, 0, "n1")));
+    new hobj2(hobject_t(object_t("ona\030me2"), string("c"), CEPH_NOSNAP, 64, 0, "n5")));
   o.push_back(new hobj2(
     hobject_t(object_t("oname3"), string("oname3"), CEPH_SNAPDIR, 910, 1, "n2")));
   o.push_back(new hobj2(
@@ -208,7 +208,7 @@ list<hobj2*> hobj2::generate_test_instances()
   return o;
 }
 
-#if 0
+#if 1
 int main()
 {
 
@@ -216,10 +216,14 @@ int main()
   for (auto g1 : o1) {
 
     hobject_t as_hobj = *g1;
-    std::cout << fmt::format("old:\t{}\nnew:\t{}\n\n", *g1, as_hobj) << std::endl;
+//     // loop-back
+//     auto dumped = fmt::format("{}", as_hobj);
+//     hobject_t from_dumped;
+//     from_dumped.parse(dumped);
+    std::cout << fmt::format("\nold:\t{}\nnew:\t{}\n", *g1, as_hobj) << std::endl;
 
-    //std::cout << fmt::format("{} \tto_str: {}", *g1, g1->to_str()) << std::endl;
-    //std::cout << *g1 << "\n";
+    std::cout << fmt::format("{} \tto_str: {}", *g1, g1->to_str()) << std::endl;
+    std::cout << "direct ostream: " << *g1 << "\n";
   }
 
   // std::string test_1 = fmt::format("{}", o1.front()->hobj.snap);

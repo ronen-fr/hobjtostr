@@ -22,6 +22,23 @@
 
 using namespace std;
 
+struct object_id_t {
+  std::string name;
+  std::string nspace;
+  std::string locator;
+  snapid_t snap = 0;
+  object_id_t() = default;
+  object_id_t(const std::string& name,
+              const std::string& nspace,
+              const std::string& locator,
+              snapid_t snap)
+    : name(name),
+      nspace(nspace),
+      locator(locator),
+      snap(snap)
+  {}
+};
+
 
 // namespace {
 // 
@@ -187,6 +204,57 @@ public:
       pool(pool), nspace(nspace),
       key(oid.name == key ? std::string() : key) {
     build_hash_cache();
+  }
+
+  static constexpr std::string virtual_to_str_w_prefix(std::string_view prefix,
+                                     const std::string& key, snapid_t snap,
+                                     uint32_t hash, int64_t pool) {
+    const uint64_t poolid{pool};
+    const uint32_t revhash = _reverse_nibbles(hash);
+    string out;
+    if (snap == CEPH_NOSNAP) {
+      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head.."), prefix, poolid, revhash);
+    } else if (snap == CEPH_SNAPDIR) {
+      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir.."), prefix, poolid, revhash);
+    } else {
+      out = fmt::format(
+	FMT_COMPILE("{}_{:016X}.{:08X}.{:x}.."), prefix, poolid, revhash,
+	(unsigned long long)snap);
+    }
+
+    //escp_6(oid.name, &out);
+    //out.push_back('.');
+    escp_6(key, &out);
+    out.push_back('.');
+    //escp_6("", &out);
+
+    return out;
+  }
+
+  static constexpr std::string virtual_to_str_w_prefix(std::string_view prefix,
+                                     const object_id_t& oid,
+                                     uint32_t hash, int64_t pool) {
+    const uint64_t poolid{pool};
+    const uint32_t revhash = _reverse_nibbles(hash);
+    auto key = (oid.name == oid.locator) ? std::string{} : oid.locator;
+    string out;
+    if (oid.snap == CEPH_NOSNAP) {
+      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.head."), prefix, poolid, revhash);
+    } else if (oid.snap == CEPH_SNAPDIR) {
+      out = fmt::format(FMT_COMPILE("{}_{:016X}.{:08X}.snapdir."), prefix, poolid, revhash);
+    } else {
+      out = fmt::format(
+	FMT_COMPILE("{}_{:016X}.{:08X}.{:x}."), prefix, poolid, revhash,
+	(unsigned long long)oid.snap);
+    }
+
+    escp_6(oid.name, &out);
+    out.push_back('.');
+    escp_6(oid.locator, &out);
+    out.push_back('.');
+    escp_6(oid.nspace, &out);
+
+    return out;
   }
 
   hobject_t(const sobject_t &soid, const std::string &key, uint32_t hash,

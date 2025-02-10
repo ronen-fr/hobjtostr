@@ -322,6 +322,8 @@ string hobject_t::to_str2() const
 }
 
 
+// February 2025: to_str3() was chosen (2.2024) as the basis for to_str() in Ceph
+
 string hobject_t::to_str3() const
 {
   uint64_t poolid(pool);
